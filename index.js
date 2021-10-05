@@ -12,6 +12,37 @@ let objectPosition = null;
 let timer = document.getElementById('timer');
 
 
+
+//Mes datas //A BOUGER D'ENDROIT APRES
+const data = [
+  {name: 'plasticbottle',
+  category: 'bad',
+  imageurl: "./images/img1.jpg",
+ },
+ {name: 'glassbottle',
+ category: 'bad',
+ imageurl: "./images/img2.jpg",
+
+ },
+ {name: 'glassbottle',
+ category: 'bad',
+ imageurl: "./images/img2.jpg",
+
+ },
+ {name: 'metalcan',
+ category: 'bad',
+ imageurl: "./images/img3.jpg",
+
+ }, {name: 'milkbottle',
+ category: 'bad',
+ imageurl: "./images/img4.jpg",
+
+ },
+
+]
+
+
+
 //on a deux classes
 //bad
 //good
@@ -36,7 +67,7 @@ setInterval(()=> {
 
 
 function detectCollision(){
-console.log(objectPosition);
+// console.log(objectPosition);
 if (basketposition.x < objectPosition.x + objectPosition.width &&
   basketposition.x + basketposition.width > objectPosition.x &&
   basketposition.y < objectPosition.y + objectPosition.height &&
@@ -67,7 +98,7 @@ setInterval(()=>{
 }, 500);
 
 
-// console.log(objectPosition);
+
 // let wasteposition = waste.getBoundingClientRect();
 
 
@@ -110,8 +141,23 @@ function random(min, max) {
 
 function createWaste() {
   const waste = document.createElement('div');
+  document.body.appendChild(waste); // where we gonna put all this raining divs
   waste.classList.add('object-falling');
-  document.body.appendChild(waste);
+  //assign a random element in the list of data
+ const randomNumber =  Math.floor(Math.random() * (data.length-1)) // random number among all the datas //ATTENTION ENELEVER LE -1???
+ const wasteElement = data[randomNumber];
+//  console.log(wasteElement);
+
+ //on va donner à l'élement toutes les properties de l'élément du data choisi
+ const ClassGoodOrBad = data[randomNumber].category
+  waste.classList.add('ClassGoodOrBad');
+  //donner l'image correspondante
+  const imagesrc = data[randomNumber].imageurl
+  const wasteImage = document.createElement("img");
+  wasteImage.src = imagesrc;
+  waste.appendChild(wasteImage);
+
+
   //make them appear in the random X axis position
   waste.style.left = Math.random() * window.innerWidth + 'px';
   //setting animation duration randomly from 2 to 5s for each object created
@@ -119,9 +165,10 @@ function createWaste() {
   //setting opacity randomly for each object created;
   waste.style.opacity = Math.random();
 
+
   //setting the size randomly TO DO
   //also make them twist a little;
-  //setting a random waste among all the waste data;
+ 
 
   // let wasteposition = waste.getBoundingClientRect(); //attention, il faut le faire pour chaque;
 
@@ -132,7 +179,8 @@ function createWaste() {
   }, 5000)
 }
 createWaste();
-
+createWaste();
+createWaste();
 
 //
 
@@ -149,34 +197,4 @@ createWaste();
 //timer
 
 
-//Mes datas 
-let data = [
-  {name: 'plasticbottle',
-  category: 'bad',
-  imageurl: "./images/img1.jpg",
- },
- {name: 'glassbottle',
- category: 'bad',
- imageurl: "./images/img2.jpg",
 
- },
- {name: 'glassbottle',
- category: 'bad',
- imageurl: "./images/img2.jpg",
-
- },
- {name: 'metalcan',
- category: 'bad',
- imageurl: "./images/img3.jpg",
-
- }, {name: 'milkbottle',
- category: 'bad',
- imageurl: "./images/img4.jpg",
-
- },
-
-]
-
-
-const images = ["./images/img1.jpg", "./images/img2.jpg", "./images/img3.jpg", "./images/img4.jpg"];
-//Initializing the image
