@@ -1,0 +1,44 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+}
+
+@font-face {
+    font-family: TheFarmerTextured;
+    src: url('TheFarmerTextured-Vintage.otf');
+} 
+
+h1{
+    font-family: TheFarmerTextured;
+font-size: 8em;
+text-align: center;
+
+}
+
+
+
+#basket{
+width: 100px;
+height: 100px;
+background-color:brown;
+position: absolute;
+/* transform: translateX();
+    z-index: 10; */
+    bottom: 0;
+}
+
+.object-falling{
+    width: 50px;
+    height: 50px;
+    background-color: chartreuse;
+    animation: fall 40s linear forwards;
+    position: absolute; 
+    /* top: -20px; */
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
