@@ -1,3 +1,4 @@
+import { datas } from "./data.js";
 
 //comment set le basket au milieu??
 let screenDimensions = document.body.getBoundingClientRect();
@@ -10,68 +11,43 @@ let firstObject = document.getElementById('myObject');
 let basketposition = null;
 let objectPosition = null;
 let timer = document.getElementById('timer');
+let wasteInScreen = [];
 
 
 
-//Mes datas //A BOUGER D'ENDROIT APRES
-const data = [
-  {name: 'plasticbottle',
-  category: 'bad',
-  imageurl: "./images/img1.jpg",
- },
- {name: 'glassbottle',
- category: 'bad',
- imageurl: "./images/img2.jpg",
+window.addEventListener('load', () => {
+  basket.style.position = 'absolute';
+  basket.style.left = 0; //on veut mettre le basket au milieu par défaut
+  basket.style.bottom = 0;
+})
 
- },
- {name: 'glassbottle',
- category: 'bad',
- imageurl: "./images/img2.jpg",
-
- },
- {name: 'metalcan',
- category: 'bad',
- imageurl: "./images/img3.jpg",
-
- }, {name: 'milkbottle',
- category: 'bad',
- imageurl: "./images/img4.jpg",
-
- },
-
-]
-
-
-
-//on a deux classes
-//bad
-//good
-
-//on essaie de faire fonctionner la collision pour un seul élément qui est le div déjà créé
-//OK CA MARCHE
-
-//ensuite il faudra que chaque élément créé ait sa propre position
-
+//avoir la position du basket
 function getBasketPosition() {
   return basket.getBoundingClientRect();
 }
-
-function getObjectPosition() {
-  return firstObject.getBoundingClientRect();
+//fonction qui calcule la position de chaque waste// SANS ARGUMENT???
+function getObjectPosition(object) {
+  return object.getBoundingClientRect();
 };
-//caculer les positions des items à chaque 500ms;
+
+
+//caculer les positions du basket et des items à chaque 500ms;
 setInterval(()=> {
   basketposition = getBasketPosition();
-  objectPosition = getObjectPosition();
+  // pour chaque waste, définir sa position
+  wasteInScreen.forEach(waste => {
+    let wastePosition =  getObjectPosition(waste);
+    console.log(wastePosition); 
+  });
 } ,500);
 
-
-function detectCollision(){
-// console.log(objectPosition);
-if (basketposition.x < objectPosition.x + objectPosition.width &&
-  basketposition.x + basketposition.width > objectPosition.x &&
-  basketposition.y < objectPosition.y + objectPosition.height &&
-  basketposition.y + basketposition.height > objectPosition.y) {
+/// DETECTER LA COLLISION
+function detectCollision(waste){
+// console.log(wastePosition);
+if (basketposition.x < wastePosition.x + wastePosition.width &&
+  basketposition.x + basketposition.width > wastePosition.x &&
+  basketposition.y < wastePosition.y + wastePosition.height &&
+  basketposition.y + basketposition.height > wastePosition.y) {
   // collision detected;
   console.log('yeah! collision!')
   
@@ -94,22 +70,11 @@ if (basketposition.x < objectPosition.x + objectPosition.width &&
 
 
 setInterval(()=>{
-  detectCollision();
+  wasteInScreen.forEach(waste => {
+    detectCollision(waste);
+  })
 }, 500);
 
-
-
-// let wasteposition = waste.getBoundingClientRect();
-
-
-
-
-
-window.addEventListener('load', () => {
-  basket.style.position = 'absolute';
-  basket.style.left = 0; //on veut mettre le basket au milieu par défaut
-  basket.style.bottom = 0;
-})
 
 
 //MAKE THE BASKET MOVE FROM LEFT TO RIGHT
@@ -131,28 +96,22 @@ window.addEventListener('keydown', (event) => {
 }
 )
 
-
-
-//MAKE OBJECTS FALL
-function random(min, max) {
-  return Math.round(Math.random() * (max - min) + min);
-}
-
+//create new OBJECTS 
 
 function createWaste() {
   const waste = document.createElement('div');
   document.body.appendChild(waste); // where we gonna put all this raining divs
   waste.classList.add('object-falling');
   //assign a random element in the list of data
- const randomNumber =  Math.floor(Math.random() * (data.length-1)) // random number among all the datas //ATTENTION ENELEVER LE -1???
- const wasteElement = data[randomNumber];
+ const randomNumber =  Math.floor(Math.random() * (datas.length-1)) // random number among all the datas //ATTENTION ENELEVER LE -1???
+ const wasteElement = datas[randomNumber];
 //  console.log(wasteElement);
 
  //on va donner à l'élement toutes les properties de l'élément du data choisi
- const ClassGoodOrBad = data[randomNumber].category
+ const ClassGoodOrBad = datas[randomNumber].category
   waste.classList.add('ClassGoodOrBad');
   //donner l'image correspondante
-  const imagesrc = data[randomNumber].imageurl
+  const imagesrc = datas[randomNumber].imageurl
   const wasteImage = document.createElement("img");
   wasteImage.src = imagesrc;
   waste.appendChild(wasteImage);
@@ -165,12 +124,14 @@ function createWaste() {
   //setting opacity randomly for each object created;
   waste.style.opacity = Math.random();
 
-
+  //push this element on the array of effective elements on screen
+  wasteInScreen.push(waste);
   //setting the size randomly TO DO
   //also make them twist a little;
- 
 
-  // let wasteposition = waste.getBoundingClientRect(); //attention, il faut le faire pour chaque;
+
+
+
 
   //we want the animation to last between 2 and 5 s so we had 2 because it's always gonna be 2 at least
   //we want to erase them from the screen after 5 sec
@@ -178,23 +139,24 @@ function createWaste() {
     waste.remove();
   }, 5000)
 }
+
+
+
+//MAKE OBJECTS FALL
 createWaste();
 createWaste();
 createWaste();
-
-//
-
-
+console.log(wasteInScreen);
 //call the function createWaste every X ms 
 
 //setInterval(createWaste, 1000); /////////////////////////
 
 
-// pour chaque waste, définir sa position
 
 
 //TIMER UNE MINUTE QUI DEFINIT LE DEBUT ET LA FIN DU JEU
 //timer
 
 
+//créer une fonction qui remove les elements créés de l'array wasteInScreen;
 
