@@ -141,8 +141,20 @@ table {
   src: url('TheFarmerTextured-Vintage.otf');
 }
 
+@font-face {
+  font-family:GeneralSansRegular;
+src: url('GeneralSans-Regular.otf');
+}
+
+@font-face {
+  font-family:GeneralSansSemiBoldItalic;
+src: url('GeneralSans-SemiboldItalic.otf');
+}
+
 
 /* LOADING PAGE */
+
+
 
 #start-btn {
   font-family: TheFarmerTextured;
@@ -153,33 +165,62 @@ table {
   align-items: center;
   border: sienna 1.5px solid;
   border-radius: 6px;
-  padding: 12px 48px;
+  padding: 12px ;
+  margin: 50px 35%;
 }
 
+
+#start-btn:hover {
+  /* grandir un peu la taille */
+  
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(#fff,0);
+  background-color: rgba(160, 82, 45, 0.7); 
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 var(--hover); }
+}
 body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  font-family: GeneralSans;
 }
+
 
 #start-screen-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  height: 100%;
+  /* justify-content: space-around; */
+  align-items: center;
   background-image: url('./images/loadingpagebg.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100%;
+  
 
 }
-
 h1 {
   font-family: TheFarmerTextured;
-  font-size: 8em;
+  font-size: 7em;
   text-align: center;
   color: rgba(160, 82, 45, 0.6);
+  margin-top: 20px;
+  margin-bottom: 150px;
+ 
 }
+
+#intro-paragraph{
+  font-family: 'GeneralSansSemiBoldItalic';
+  color: sienna;
+  font-size: 1.3em;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+
 
 /* GAME CONTAINER */
 

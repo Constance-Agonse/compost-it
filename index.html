@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,19 +9,48 @@
     <link rel="stylesheet" href="style.css">
     <script type="module" src="index.js"></script>
 </head>
+
 <body>
     <div id="start-screen-container">
         <h1>Compost it</h1>
-        <p>It's raining waste! <br>
-            Make the perfect compost to feed the worms and save the planet 🌎!</p>
-        <button id='start-btn'>PLAY GAME</button>
+        <!-- <div id=intro-container> -->
+            <p id="intro-paragraph">It's raining waste! <br>
+                Make the perfect compost to feed the worms and save the planet 🌎!</p>
+
+            <button id='start-btn'> PLAY GAME </button>
+        <!-- </div> -->
     </div>
-   
-<div id="game-container" style="display: none;">
-    <div id="timer"> </div>
-    
-    <div id="basket"> </div>
-    <!-- <div id="myObject" class="object-falling"> </div> -->
-</div>
+
+    <div id="game-container" style="display: none;">
+        <div id="timer"> 01:00 </div>
+
+        <div id="basket"> </div>
+
+        <!-- <div id="myObject" class="object-falling"> </div> -->
+    </div>
+
+    <div id="maturation-stage">
+        <p>Mixing the compost</p>
+    </div>
+
+    <div id='winning'>
+        <div id="result">You made XXX points </div>
+        <p>You are a compost master</p>
+        <p>Learn more about how to make a good compost <a href="">here</a>
+        </p>
+        <button id='start-btn'>PLAY AGAIN</button>
+
+    </div>
+
+    <div id='losing'>
+        <div id="result">You made XXX points </div>
+        <p>Try again, you are not gonna save the planet at this pace!</p>
+        <p>Learn more about how to make a good compost <a href="">here</a>
+        </p>
+        <button id='start-btn'>PLAY AGAIN</button>
+    </div>
+
+
 </body>
+
 </html>

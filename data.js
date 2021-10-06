@@ -124,4 +124,10 @@ export const dataWasteItems = [
     score: -100,
     imageurl: "./waste-images/salmon.png",
   },
+  {
+    name: 'deadleaves',
+    category: 'good',
+    score: 20,
+    imageurl: "./waste-images/dead-leaf2.png",
+  },
 ];
