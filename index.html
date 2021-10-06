@@ -13,16 +13,17 @@
 <body>
     <div id="start-screen-container">
         <h1>Compost it</h1>
-        <!-- <div id=intro-container> -->
+    
             <p id="intro-paragraph">It's raining waste! <br>
                 Make the perfect compost to feed the worms and save the planet 🌎!</p>
 
             <button id='start-btn'> PLAY GAME </button>
-        <!-- </div> -->
+        
     </div>
 
     <div id="game-container" style="display: none;">
-        <div id="timer"> 01:00 </div>
+        <div id="timer"> 01:00 </div>   
+        <!-- ECRIRE LE BON NUMERO DE SECONDES -->
 
         <div id="basket"> </div>
 
@@ -34,7 +35,7 @@
     </div>
 
     <div id='winning'>
-        <div id="result">You made XXX points </div>
+        <div id="result">You made <p id='scorewinHTML'></p> points </div>
         <p>You are a compost master</p>
         <p>Learn more about how to make a good compost <a href="">here</a>
         </p>
@@ -43,7 +44,7 @@
     </div>
 
     <div id='losing'>
-        <div id="result">You made XXX points </div>
+        <div id="result">You made <p id='scorelooseHTML'></p> points </div>
         <p>Try again, you are not gonna save the planet at this pace!</p>
         <p>Learn more about how to make a good compost <a href="">here</a>
         </p>
