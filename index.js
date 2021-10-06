@@ -1,153 +1,92 @@
-import { datas } from "./data.js";
+import { Waste } from "./waste.js";
+
+// CONSTANTS
+const BASKET_WIDTH = 200;
+const BASKET_HEIGHT = 200;
+const GAME_TIME = 5000;
 
 //comment set le basket au milieu??
 let screenDimensions = document.body.getBoundingClientRect();
 let screenLimitWidth = screenDimensions.width;
 let basket = document.getElementById("basket");
-const modifier = 10; // il se déplace 10px par 10px;
-let basketX = 0; //pas sûre que ça serve à qqchose
-let counter = 0;
-let firstObject = document.getElementById('myObject');
-let basketposition = null;
-let objectPosition = null;
-let timer = document.getElementById('timer');
-let wasteInScreen = [];
+let body = document.querySelector('body');
+let rainInterval = null;
+const BASKET_MOVE_STEP = 10; // il se déplace 10px par 10px;
+const gameContainer = document.getElementById('game-container');
+const startScreenContainer = document.getElementById('start-screen-container');
 
-
-
-window.addEventListener('load', () => {
-  basket.style.position = 'absolute';
-  basket.style.left = 0; //on veut mettre le basket au milieu par défaut
-  basket.style.bottom = 0;
-})
-
-//avoir la position du basket
-function getBasketPosition() {
-  return basket.getBoundingClientRect();
-}
-//fonction qui calcule la position de chaque waste// SANS ARGUMENT???
-function getObjectPosition(object) {
-  return object.getBoundingClientRect();
-};
-
-
-//caculer les positions du basket et des items à chaque 500ms;
-setInterval(()=> {
-  basketposition = getBasketPosition();
-  // pour chaque waste, définir sa position
-  wasteInScreen.forEach(waste => {
-    let wastePosition =  getObjectPosition(waste);
-    console.log(wastePosition); 
-  });
-} ,500);
-
-/// DETECTER LA COLLISION
-function detectCollision(waste){
-// console.log(wastePosition);
-if (basketposition.x < wastePosition.x + wastePosition.width &&
-  basketposition.x + basketposition.width > wastePosition.x &&
-  basketposition.y < wastePosition.y + wastePosition.height &&
-  basketposition.y + basketposition.height > wastePosition.y) {
-  // collision detected;
-  console.log('yeah! collision!')
-  
-  //si une collision détectée = on en compte qu'une 
-  //arrêter la collision 
-
-  if (element.classList.contains('bad')){
-    counter --;
-    //play a loose song
-  };
-  if(element.classList.contains('good')) {
-    counter ++;
-    //play a win song
-  };
-
-  //il faut arrêter
-
-}
+const state = {
+  basketXPosition: screenLimitWidth / 2 - BASKET_WIDTH / 2,
+  totalScore: 0,
 }
 
-
-setInterval(()=>{
-  wasteInScreen.forEach(waste => {
-    detectCollision(waste);
-  })
-}, 500);
-
-
-
-//MAKE THE BASKET MOVE FROM LEFT TO RIGHT
-window.addEventListener('keydown', (event) => {
-  let basketposition = getBasketPosition();
-  console.log(basketposition);
-  if (basketposition.x < (screenLimitWidth - 100)) { ///100 correspond à la taille de mon basket
-    if (event.key === 'ArrowRight') {
-      basket.style.left = parseInt(basket.style.left) + modifier + 'px';
-      basketX += modifier; //PAS SURE QUE CA SERVE A QQCHOSE
-    }
-  }
-  if (basketposition.x > 0) {
-    if (event.key === 'ArrowLeft') {
-      basket.style.left = parseInt(basket.style.left) - modifier + 'px';
-      basketX -= modifier; //PAS SURE QUE CA SERVE A QQCHOSE
-    }
-  }
-}
-)
-
-//create new OBJECTS 
-
-function createWaste() {
-  const waste = document.createElement('div');
-  document.body.appendChild(waste); // where we gonna put all this raining divs
-  waste.classList.add('object-falling');
-  //assign a random element in the list of data
- const randomNumber =  Math.floor(Math.random() * (datas.length-1)) // random number among all the datas //ATTENTION ENELEVER LE -1???
- const wasteElement = datas[randomNumber];
-//  console.log(wasteElement);
-
- //on va donner à l'élement toutes les properties de l'élément du data choisi
- const ClassGoodOrBad = datas[randomNumber].category
-  waste.classList.add('ClassGoodOrBad');
-  //donner l'image correspondante
-  const imagesrc = datas[randomNumber].imageurl
-  const wasteImage = document.createElement("img");
-  wasteImage.src = imagesrc;
-  waste.appendChild(wasteImage);
-
-
-  //make them appear in the random X axis position
-  waste.style.left = Math.random() * window.innerWidth + 'px';
-  //setting animation duration randomly from 2 to 5s for each object created
-  waste.style.animationDuration = Math.random() * 3 + 2 + 's';
-  //setting opacity randomly for each object created;
-  waste.style.opacity = Math.random();
-
-  //push this element on the array of effective elements on screen
-  wasteInScreen.push(waste);
-  //setting the size randomly TO DO
-  //also make them twist a little;
-
-
-
-
-
-  //we want the animation to last between 2 and 5 s so we had 2 because it's always gonna be 2 at least
-  //we want to erase them from the screen after 5 sec
+const startButton = document.getElementById('start-btn');
+startButton.addEventListener('click', () => {
+  startScreenContainer.style.display = 'none';
+  startButton.remove();
+  startGame();
   setTimeout(() => {
-    waste.remove();
-  }, 5000)
+    // gameOver();
+  }, GAME_TIME);
+});
+
+const startGame = () => {
+  gameContainer.style.display = 'block';
+  const renderBasket = () => {
+    basket.style.left = `${state.basketXPosition}px`;
+  }
+  renderBasket();
+  // interval that generates one new item ones a second (1000ms)
+  rainInterval = setInterval(() => {
+    const wasteItem = new Waste(gameContainer);
+    wasteItem.makeItRain((wasteItemYPosition, wasteItemXPosition) => {
+      if (isCollided(wasteItemYPosition, wasteItemXPosition)) {
+        state.totalScore += wasteItem.score;
+        wasteItem.removeWaste();
+      }
+    });
+  }, 1000);
+
+  // MAKE THE BASKET MOVE FROM LEFT TO RIGHT
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight' && state.basketXPosition < screenLimitWidth - BASKET_WIDTH) {
+      state.basketXPosition += BASKET_MOVE_STEP;
+    }
+    if (event.key === 'ArrowLeft' && state.basketXPosition > 0) {
+      state.basketXPosition -= BASKET_MOVE_STEP;
+    }
+    renderBasket();
+  });
+}
+
+const gameOver = () => {
+ clearInterval(rainInterval);
+ const gameOverScreen = document.createElement('div');
+ gameOverScreen.classList.add('gameover-screen');
+ gameContainer.appendChild(gameOverScreen);
+ basket.remove();
+}
+
+const isCollided = (wasteItemYPosition, wasteItemXPosition) => {
+  const collisionY = window.innerHeight - BASKET_HEIGHT + 70;
+  const wasteItemWidth = 80;
+  const wasteItemHeight = 80;
+  if (state.basketXPosition < wasteItemXPosition + wasteItemWidth &&
+    state.basketXPosition + BASKET_WIDTH > wasteItemXPosition &&
+    collisionY < wasteItemYPosition + wasteItemHeight &&
+    collisionY + collisionY > wasteItemYPosition) {
+    return true
+  } else {
+    return false;
+  }
 }
 
 
 
-//MAKE OBJECTS FALL
-createWaste();
-createWaste();
-createWaste();
-console.log(wasteInScreen);
-//call the function createWaste every X ms 
+
+
+// createWaste();
+//call the function createWaste every X ms
 
 //setInterval(createWaste, 1000); /////////////////////////
 
@@ -156,6 +95,7 @@ console.log(wasteInScreen);
 
 //TIMER UNE MINUTE QUI DEFINIT LE DEBUT ET LA FIN DU JEU
 //timer
+
 
 
 //créer une fonction qui remove les elements créés de l'array wasteInScreen;
