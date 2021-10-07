@@ -4,7 +4,7 @@ import { Chronometer } from "./chronometer.js";
 // CONSTANTES
 const BASKET_WIDTH = 200;
 const BASKET_HEIGHT = 200;
-const GAME_TIME = 15000;
+const GAME_TIME = 35000;
 const BASKET_MOVE_STEP = 10; // il se déplace 10px par 10px;
 
 const chronometer = new Chronometer(GAME_TIME / 1000);
@@ -24,8 +24,9 @@ const maturationStage = document.getElementById('maturation-stage');
 const countdownEl = document.getElementById('timer');
 const winningPage = document.getElementById('winning');
 const losingPage = document.getElementById('losing');
-const scorewinHTML = document.getElementById ('scorewinHTML');
-const scorelooseHTML = document.getElementById ('scorelooseHTML');
+const scorewinHTML = document.getElementById('scorewinHTML');
+const scorelooseHTML = document.getElementById('scorelooseHTML');
+const winPlayAgain = document.querySelector('winPlayAgain')
 
 
 const state = {
@@ -34,36 +35,34 @@ const state = {
 }
 
 
+
 const endGame = () => {
   clearInterval(rainInterval);
   const gameOverScreen = document.createElement('div');
   maturationStage.style.display = 'block';
   gameContainer.style.display = 'none';
-  losingPage.style.display ='none';
-  winningPage.style.display ='none';
-
   clearInterval(countdownInterval);
   basket.remove();
 
   //au bout de 5 secondes, le maturation stage disparait, si on a gagné la winning page s'affiche, 
   //si on a perdu, la losing page s'affiche
-console.log(state.totalScore);
+  console.log(state.totalScore);
   setTimeout(() => {
     maturationStage.style.display = 'none';
-  if (state.totalScore > 100) {
-    winningPage.style.display ='block';
-    scorewinHTML.innerHTML = state.totalScore;
-    losingPage.style.display ='none';
-    //display wiining page
-  }
-  else {
-    losingPage.style.display ='block';
-    winningPage.style.display ='none';
-    scorelooseHTML.innerHTML = state.totalScore;
-  };
+    if (state.totalScore > 20) {
+      winningPage.style.display = 'block';
+      scorewinHTML.innerHTML = state.totalScore;
+      losingPage.style.display = 'none';
+      //display wiining page
+    }
+    else {
+      losingPage.style.display = 'block';
+      winningPage.style.display = 'none';
+      scorelooseHTML.innerHTML = state.totalScore;
+    };
     // gameOverScreen.classList.add('gameover-screen');
     // gameContainer.appendChild(gameOverScreen);
-  }, 5000); 
+  }, 5000);
   // la page maturation stage est là pendant 5 secondes
 }
 
@@ -92,6 +91,10 @@ const startGame = () => {
 
   //countdownInterval = setInterval(updateCountDown, 1000);
   gameContainer.style.display = 'block';
+  winningPage.style.display = 'none';
+  losingPage.style.display = 'none';
+
+  //recacher les display none des deux écrans win et loose;
   const renderBasket = () => {
     basket.style.left = `${state.basketXPosition}px`;
   }
@@ -140,4 +143,11 @@ const isCollided = (wasteItemYPosition, wasteItemXPosition) => {
     return false;
   }
 };
+
+
+winPlayAgain.addEventListener('click', () => {
+  winningPage.style.display = 'none';
+  gameContainer.style.display = 'block';
+
+});
 

@@ -156,7 +156,7 @@ src: url('GeneralSans-SemiboldItalic.otf');
 
 
 
-#start-btn {
+.btn{
   font-family: TheFarmerTextured;
   font-size: 5em;
   text-align: center;
@@ -170,7 +170,7 @@ src: url('GeneralSans-SemiboldItalic.otf');
 }
 
 
-#start-btn:hover {
+.btn:hover {
   /* grandir un peu la taille */
   
   animation: pulse 1s;
@@ -264,6 +264,7 @@ h1 {
   height: 80px;
   background-repeat: no-repeat;
   background-size: contain;
+  transform-origin: center;
 }
 
 
@@ -283,4 +284,35 @@ h1 {
   to {
     transform: translateY(100vh);
   }
+}
+
+#winning{
+  background-image: url('./images/YOUWON.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+
+}
+
+#losing{
+  background-image: url('./images/YOULOSE.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+}
+
+#maturation-stage{
+  background-image: url('./images/soil.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+  display: flex;
+}
+
+#maturation-stage img{
+  align-items: center;
+  max-width: 500px;
 }

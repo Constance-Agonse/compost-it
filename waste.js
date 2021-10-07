@@ -8,7 +8,8 @@ export class Waste {
     this.wasteElement = document.createElement('div');
     this.wasteElement.classList.add('waste-item');
     this.wasteElement.style.left = `${this.xPosition}px`;
-
+    const randomAngle = Math.floor(Math.random()*360);
+    this.wasteElement.style.transform = `rotate(${randomAngle}deg)`;
     const randomIndex = Math.floor(Math.random() * (dataWasteItems.length - 1));
     const randomWasteElement = dataWasteItems[randomIndex];
     this.wasteElement.style.backgroundImage = `url(${randomWasteElement.imageurl})`;
