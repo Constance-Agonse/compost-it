@@ -1,6 +1,7 @@
 export class Chronometer {
 
   constructor(limit) {
+    this.startTime = limit
     this.currentTime = limit;
     this.intervalId = null;
   }
@@ -31,6 +32,7 @@ export class Chronometer {
 
   stop() {
     clearInterval(this.intervalId);
+    this.currentTime = this.startTime
   }
 
   reset() {

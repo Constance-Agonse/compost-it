@@ -13,15 +13,16 @@
 
 <body>
     <div id="start-screen-container">
+        <h1>Compost it</h1>
         <div id="text-container">
-            <h1>Compost it</h1>
             <p id="intro-paragraph">It's raining waste! <br>
                 Make the perfect compost to feed the worms and save the planet 🌎!</p>
             <div id="arrows"> <i class="fa-solid fa-caret-left"></i>
                 <i class="fa-solid fa-caret-right"></i> </div>
             <p>Move the basket with the arrows of your keyboard to catch the ingredients of a good compost.</p>
-            <button id='start-btn' class='btn'> PLAY GAME </button>
         </div>
+        <button id='start-btn' class='btn'> PLAY GAME </button>
+
     </div>
 
     <div id="game-container" style="display: none">
@@ -33,22 +34,30 @@
         <!-- <div id="myObject" class="object-falling"> </div> -->
     </div>
 
-    <div id="maturation-stage" >
+    <div id="maturation-stage">
         <p>Mixing the compost</p>
         <img src="./images/turning worm.png" alt="turning worm">
     </div>
 
     <div id='end-page' style="display: none">
-        <div id="result"> <span id="congrats-word"> </span>You made <span id='scoreHTML'></span> points
-            <p id="reward-sentence"></p>
-            <!-- <p>Try again, you are not gonna save the planet at this pace!</p> -->
-            <p>You can review how to make a good compost <a href="">here</a>
-            </p>
-            <p>"the best waste is the one that doesn't exist"</p>
-            <!-- (http://zerowaste.fr) -->
+        <div id='content-end-page'>
+            <div id="result"> <span id="congrats-word"> </span>You made <span id='scoreHTML'></span> points
+                <p id="reward-sentence"></p>
+            </div>
+            <div id='video-div'>
+                <p>Learn why composting is important here
+                </p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/qHYzRaepeMw"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+
+            </div>
+
+            <button id='play-again' class='btn'>PLAY AGAIN</button>
         </div>
-        <button id='play-again' class='btn'>PLAY AGAIN</button>
     </div>
+
 
 </body>
 

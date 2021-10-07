@@ -43,7 +43,14 @@ const endGame = () => {
   maturationStage.style.display = 'block';
   gameContainer.style.display = 'none';
   clearInterval(countdownInterval);
-  basket.remove();
+chronometer.stop();
+
+  //instead of removing, move to style.display='none'
+  // basket.remove();
+  basket.style.display = 'none';
+//////ici
+
+
   //au bout de 5 secondes, le maturation stage disparait, si on a gagné la winning page s'affiche, 
   //si on a perdu, la losing page s'affiche
   console.log(state.totalScore);
@@ -75,6 +82,7 @@ const endGame = () => {
 
 
 
+
 //UPDATE COUNTDOWN IN THE HTML
 const updateCountDown = () => {
   const minutes = chronometer.getMinutes();
@@ -84,7 +92,6 @@ const updateCountDown = () => {
 
 
 //QUAND ON PRESSE LE START BTN
-
 startButton.addEventListener('click', () => {
   startScreenContainer.style.display = 'none';
   startGame();
@@ -104,6 +111,7 @@ const startGame = () => {
   //recacher les display none de l'écran de fin;
   const renderBasket = () => {
     basket.style.left = `${state.basketXPosition}px`;
+    basket.style.display = 'block';
   }
 
   // let result = state.totalScore;
@@ -124,6 +132,9 @@ const startGame = () => {
     });
   }, 1000);
 
+
+
+
   // MOVE BASKET FROM LEFT TO RIGHT
   window.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowRight' && state.basketXPosition < screenLimitWidth - BASKET_WIDTH) {
@@ -135,6 +146,8 @@ const startGame = () => {
     renderBasket();
   });
 }
+
+
 
 //VERIFIER LA COLLISION
 const isCollided = (wasteItemYPosition, wasteItemXPosition) => {
@@ -154,6 +167,7 @@ const isCollided = (wasteItemYPosition, wasteItemXPosition) => {
 ///SET LE BOUTON DE PLAY AGAIN
 playAgain.addEventListener('click', () => {
   endPage.style.display = 'none';
+  
   startGame();
   setTimeout(() => {
     endGame();

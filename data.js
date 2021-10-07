@@ -130,4 +130,216 @@ export const dataWasteItems = [
     score: 20,
     imageurl: "./waste-images/dead-leaf2.png",
   },
+
+
+
+  //////////////////////// attention vérifier good or bad!!
+  {
+    name: 'almonds',
+    category: 'good',
+    score: 20,
+    imageurl: "./waste-images/almonds.png",
+  },
+  {
+    name: 'apple2',
+    category: 'good',
+    score: -100,
+    imageurl: "./waste-images/apple2.png",
+  },
+  {
+    name: 'artichoke',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/artichoke.png",
+  },
+  {
+    name: 'avocado',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/avocado.png",
+  },
+  {
+    name: 'beetroot',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/beetroot.png",
+  },
+  {
+    name: 'beetroot2',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/beetroot2.png",
+  },
+  {
+    name: 'branchie',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/branchie.png",
+  },
+  {
+    name: 'brocoli',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/brocoli.png",
+  },
+  {
+    name: 'butternut',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/butternut.png",
+  },
+  {
+    name: 'carrot2',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/carrot2.png",
+  },
+  {
+    name: 'celerybranch',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/celerybranch.png",
+  },
+  {
+    name: 'cherry',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/cherry.png",
+  },
+  {
+    name: 'coffee',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/coffee.png",
+  },
+  {
+    name: 'dogpoop',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/dogpoop.png",
+  },
+  {
+    name: 'grass',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/grass.png",
+  },
+  {
+    name: 'herbs',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/herbs.png",
+  },
+  {
+    name: 'mango',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/mango.png",
+  },
+  {
+    name: 'meat',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/meat.png",
+  },
+  {
+    name: 'meat2',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/meat2.png",
+  },
+  {
+    name: 'oliveoil',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/oliveoil.png",
+  },
+  {
+    name: 'paille',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/paille.png",
+  },
+  {
+    name: 'paille2',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/paille2.png",
+  },
+  {
+    name: 'pasta',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/pasta.png",
+  },
+  {
+    name: 'peach',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/peach.png",
+  },
+  {
+    name: 'peach2',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/peach2.png",
+  },
+  {
+    name: 'pear',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/pear.png",
+  },
+  {
+    name: 'peas',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/peas.png",
+  },
+  {
+    name: 'pizza',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/pizza.png",
+  },
+  {
+    name: 'salad2',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/salad2.png",
+  },
+  {
+    name: 'spaghetti',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/spaghetti.png",
+  },
+  {
+    name: 'strawberry',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/strawberry.png",
+  },
+  {
+    name: 'teabag',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/teabag.png",
+  },
+  {
+    name: 'toiletpaper',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/toiletpaper.png",
+  },
+  {
+    name: 'watermelon',
+    category: 'bad',
+    score: -100,
+    imageurl: "./waste-images/watermelon.png",
+  },
+
+
+
+
 ];
