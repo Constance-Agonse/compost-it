@@ -312,14 +312,39 @@ h1 {
   left: 0;
 }
 
-@keyframes fall {
+/* @keyframes fall {
   to {
     transform: translateY(100vh);
   }
+} */
+
+
+#turning-worm{
+  width: 300px;
+  -webkit-animation: spin 4000ms linear infinite;
+  -moz-animation: spin 4000ms linear infinite;
+  -ms-animation: spin 4000ms linear infinite;
+      animation: spin 4000ms linear infinite;
+       
 }
 
 
-
+@-ms-keyframes spin {
+  from { -ms-transform: rotate(0deg); }
+  to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
 
 
 #maturation-stage{
@@ -334,7 +359,6 @@ h1 {
 }
 
 #maturation-stage p{
-  color: white;
 font-size: 6.5em;
 padding-top: 100px;
 }
@@ -344,6 +368,39 @@ padding-top: 100px;
   max-width: 500px;
 
 }
+
+
+
+/* EFFECT FROM A YOUTUBE VIDEO https://www.youtube.com/watch?v=Tf6qm5JMUXQ&list=WL&index=4&ab_channel=OnlineTutorials */
+.cool-effect{
+  position: relative;
+}
+
+.cool-effect p{
+  position: absolute;
+  transform: translate (-50%, -50%);
+  font-size: 6em;
+  font-size: 6.5em;
+padding-top: 100px;
+
+}
+.cool-effect p:nth-child(1){
+  color: transparent;
+  -webkit-text-stroke: 2px white;
+}
+.cool-effect p:nth-child(2){
+  color: white;
+  animation: animate 2s ease-in-out infinite;
+}
+@keyframes animate {
+  0%,100%{
+    clip-path: polygon(0% 65%, 13% 57%, 26% 55%, 40% 64%, 52% 68%, 69% 63%, 82% 57%, 95% 57%, 100% 59%, 100% 100%, 0% 100%);
+  }
+  50%{
+    clip-path: polygon(0% 65%, 8% 68%, 22% 67%, 40% 64%, 50% 64%, 63% 59%, 75% 55%, 88% 51%, 100% 49%, 100% 100%, 0% 100%);
+  }
+}
+
 
 /* ENDPAGE */
 
@@ -362,7 +419,7 @@ padding-top: 100px;
 }
 
 #content-end-page{
-  background-color:rgba(#ffffff,0.5);
+background-color:rgba(#ffffff,0.5);
   left: 0;
 }
 

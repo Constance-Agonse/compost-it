@@ -4,7 +4,7 @@ import { Chronometer } from "./chronometer.js";
 // CONSTANTES
 const BASKET_WIDTH = 200;
 const BASKET_HEIGHT = 200;
-const GAME_TIME = 10000;
+const GAME_TIME = 5000;
 const BASKET_MOVE_STEP = 10; // il se déplace 10px par 10px;
 
 const chronometer = new Chronometer(GAME_TIME / 1000);
@@ -28,7 +28,7 @@ const playAgain = document.getElementById('play-again');
 let rewardSentence = document.getElementById('reward-sentence');
 let congratsWord = document.getElementById('congrats-word');
 const startButton = document.getElementById('start-btn');
-
+let collideMusic = document.getElementById('collide-music');
 
 const state = {
   basketXPosition: screenLimitWidth / 2 - BASKET_WIDTH / 2,
@@ -43,39 +43,38 @@ const endGame = () => {
   maturationStage.style.display = 'block';
   gameContainer.style.display = 'none';
   clearInterval(countdownInterval);
-chronometer.stop();
+  chronometer.stop();
+  collideMusic.innerHTML = '';
 
   //instead of removing, move to style.display='none'
   // basket.remove();
   basket.style.display = 'none';
-//////ici
+  //////ici
 
 
   //au bout de 5 secondes, le maturation stage disparait, si on a gagné la winning page s'affiche, 
   //si on a perdu, la losing page s'affiche
   console.log(state.totalScore);
   setTimeout(() => {
-      // la page maturation stage est visible pendant 5 secondes
+    // la page maturation stage est visible pendant 5 secondes
     maturationStage.style.display = 'none';
     if (state.totalScore > 20) {
       endPage.style.backgroundImage = `url('./images/YOUWON.png')`;
-      
+
       rewardSentence.innerHTML = 'You are a compost master';
-      congratsWord.innerHTML ='Yeah! ';
-    endPage.style.display = 'block';
-    scorewHTML.innerHTML = state.totalScore;
-  console.log('OKKKKKK')};
-  
+      congratsWord.innerHTML = 'Yeah! ';
+      endPage.style.display = 'block';
+      scorewHTML.innerHTML = state.totalScore;
+    };
+
     if (state.totalScore <= 20) {
       endPage.style.display = 'block';
-      congratsWord.innerHTML ='Oups! '
+      congratsWord.innerHTML = 'Oups! '
       scorewHTML.innerHTML = state.totalScore;
       endPage.style.backgroundImage = `url('./images/YOULOSE.png')`
       rewardSentence.innerHTML = 'Try again, you are not gonna save the planet at this pace!';
-      console.log('NOOOOO')
-       //append a bad phrase
     };
-  
+
   }, 5000);
 
 }
@@ -101,11 +100,9 @@ startButton.addEventListener('click', () => {
 });
 
 const startGame = () => {
-
   chronometer.start(updateCountDown)
-
   gameContainer.style.display = 'block';
-  endPage.style.display ='none';
+  endPage.style.display = 'none';
 
 
   //recacher les display none de l'écran de fin;
@@ -126,6 +123,18 @@ const startGame = () => {
     const wasteItem = new Waste(gameContainer);
     wasteItem.makeItRain((wasteItemYPosition, wasteItemXPosition) => {
       if (isCollided(wasteItemYPosition, wasteItemXPosition)) {
+
+
+        if (wasteItem.category === 'good') {
+          collideMusic.innerHTML = `<audio controls autoplay style="display: none">
+        <source src="./sounds/242501__gabrielaraujo__powerup-success.wav" type="audio/mpeg" >
+        </audio>`};
+        if (wasteItem.category === 'bad') {
+        collideMusic.innerHTML = `<audio controls autoplay style="display: none">
+        <source src="sounds/457752__tissman__fail4.wav" type="audio/mpeg" >
+        </audio>`};
+
+        // //////////
         state.totalScore += wasteItem.score;
         wasteItem.removeWaste();
       }
@@ -167,7 +176,7 @@ const isCollided = (wasteItemYPosition, wasteItemXPosition) => {
 ///SET LE BOUTON DE PLAY AGAIN
 playAgain.addEventListener('click', () => {
   endPage.style.display = 'none';
-  
+
   startGame();
   setTimeout(() => {
     endGame();

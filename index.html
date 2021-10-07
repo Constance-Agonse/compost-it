@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    
     <div id="start-screen-container">
         <h1>Compost it</h1>
         <div id="text-container">
@@ -22,22 +23,29 @@
             <p>Move the basket with the arrows of your keyboard to catch the ingredients of a good compost.</p>
         </div>
         <button id='start-btn' class='btn'> PLAY GAME </button>
-
     </div>
+
+
 
     <div id="game-container" style="display: none">
         <div id="timer"> 01:00 </div>
         <!-- ECRIRE LE BON NUMERO DE SECONDES -->
 
         <div id="basket"> </div>
-
-        <!-- <div id="myObject" class="object-falling"> </div> -->
+        <div id="collide-music"></div>
     </div>
+
+
 
     <div id="maturation-stage">
-        <p>Mixing the compost</p>
-        <img src="./images/turning worm.png" alt="turning worm">
+        <div class="cool-effect">
+            <p>Mixing the compost</p>
+            <p>Mixing the compost</p>
+        </div>
+        <img id ="turning-worm" src="./images/turning worm.png" alt="turning worm">
     </div>
+
+
 
     <div id='end-page' style="display: none">
         <div id='content-end-page'>
@@ -51,9 +59,7 @@
                     title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
-
             </div>
-
             <button id='play-again' class='btn'>PLAY AGAIN</button>
         </div>
     </div>
