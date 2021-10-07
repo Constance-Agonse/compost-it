@@ -5,24 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test app</title>
+    <title>Compost it</title>
     <link rel="stylesheet" href="style.css">
     <script type="module" src="index.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 </head>
 
 <body>
     <div id="start-screen-container">
-        <h1>Compost it</h1>
-    
+        <div id="text-container">
+            <h1>Compost it</h1>
             <p id="intro-paragraph">It's raining waste! <br>
                 Make the perfect compost to feed the worms and save the planet 🌎!</p>
-
+            <div id="arrows"> <i class="fa-solid fa-caret-left"></i>
+                <i class="fa-solid fa-caret-right"></i> </div>
+            <p>Move the basket with the arrows of your keyboard to catch the ingredients of a good compost.</p>
             <button id='start-btn' class='btn'> PLAY GAME </button>
-        
+        </div>
     </div>
 
-    <div id="game-container" style="display: none;">
-        <div id="timer"> 01:00 </div>   
+    <div id="game-container" style="display: none">
+        <div id="timer"> 01:00 </div>
         <!-- ECRIRE LE BON NUMERO DE SECONDES -->
 
         <div id="basket"> </div>
@@ -30,28 +33,22 @@
         <!-- <div id="myObject" class="object-falling"> </div> -->
     </div>
 
-    <div id="maturation-stage">
+    <div id="maturation-stage" >
         <p>Mixing the compost</p>
         <img src="./images/turning worm.png" alt="turning worm">
     </div>
 
-    <div id='winning'>
-        <div id="result">You made <p id='scorewinHTML'></p> points </div>
-        <p>You are a compost master</p>
-        <p>You can review how to make a good compost <a href="">here</a>
-        </p>
-        <button id='winPlayAgain' class='btn'>PLAY AGAIN</button>
-
-    </div>
-
-    <div id='losing'>
-        <div id="result">You made <p id='scorelooseHTML'></p> points </div>
-        <p>Try again, you are not gonna save the planet at this pace!</p>
-        <p>Learn more about how to make a good compost <a href="">here</a>
-        </p>
+    <div id='end-page' style="display: none">
+        <div id="result"> <span id="congrats-word"> </span>You made <span id='scoreHTML'></span> points
+            <p id="reward-sentence"></p>
+            <!-- <p>Try again, you are not gonna save the planet at this pace!</p> -->
+            <p>You can review how to make a good compost <a href="">here</a>
+            </p>
+            <p>"the best waste is the one that doesn't exist"</p>
+            <!-- (http://zerowaste.fr) -->
+        </div>
         <button id='play-again' class='btn'>PLAY AGAIN</button>
     </div>
-
 
 </body>
 
