@@ -4,7 +4,7 @@ import { Chronometer } from "./chronometer.js";
 // CONSTANTES
 const BASKET_WIDTH = 200;
 const BASKET_HEIGHT = 200;
-const GAME_TIME = 5000;
+const GAME_TIME = 35000;
 const BASKET_MOVE_STEP = 10; // il se déplace 10px par 10px;
 
 const chronometer = new Chronometer(GAME_TIME / 1000);
