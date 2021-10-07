@@ -16,6 +16,7 @@ export class Waste {
     this.category = randomWasteElement.category;
     this.name = randomWasteElement.name;
     this.score = randomWasteElement.score;
+    this.wasteElement.style.filter = 'drop-shadow(6px 6px 6px rgba(75, 72, 77, 0.5))';
 
     gameContainer.appendChild(this.wasteElement);
 

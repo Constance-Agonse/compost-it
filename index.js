@@ -2,9 +2,9 @@ import { Waste } from "./waste.js";
 import { Chronometer } from "./chronometer.js";
 
 // CONSTANTES
-const BASKET_WIDTH = 200;
-const BASKET_HEIGHT = 200;
-const GAME_TIME = 35000;
+const BASKET_WIDTH = 170;
+const BASKET_HEIGHT = 170;
+const GAME_TIME = 60000;
 const BASKET_MOVE_STEP = 10; // il se déplace 10px par 10px;
 
 const chronometer = new Chronometer(GAME_TIME / 1000);
@@ -29,6 +29,7 @@ let rewardSentence = document.getElementById('reward-sentence');
 let congratsWord = document.getElementById('congrats-word');
 const startButton = document.getElementById('start-btn');
 let collideMusic = document.getElementById('collide-music');
+let scoreGameContainer = document.getElementById('score-game-container');
 
 const state = {
   basketXPosition: screenLimitWidth / 2 - BASKET_WIDTH / 2,
@@ -40,7 +41,7 @@ const state = {
 const endGame = () => {
   clearInterval(rainInterval);
   // const gameOverScreen = document.createElement('div');
-  maturationStage.style.display = 'block';
+  maturationStage.style.display = 'flex';
   gameContainer.style.display = 'none';
   clearInterval(countdownInterval);
   chronometer.stop();
@@ -49,8 +50,9 @@ const endGame = () => {
   //instead of removing, move to style.display='none'
   // basket.remove();
   basket.style.display = 'none';
-  //////ici
 
+  const miamSound = document.getElementById('miam-sound');
+  miamSound.play();
 
   //au bout de 5 secondes, le maturation stage disparait, si on a gagné la winning page s'affiche, 
   //si on a perdu, la losing page s'affiche
@@ -100,21 +102,16 @@ startButton.addEventListener('click', () => {
 });
 
 const startGame = () => {
+  state.totalScore = 0;
   chronometer.start(updateCountDown)
   gameContainer.style.display = 'block';
   endPage.style.display = 'none';
-
 
   //recacher les display none de l'écran de fin;
   const renderBasket = () => {
     basket.style.left = `${state.basketXPosition}px`;
     basket.style.display = 'block';
   }
-
-  // let result = state.totalScore;
-  // setInterval(() => {
-  //   console.log(result);
-  // }, 1000);
 
   renderBasket();
 
@@ -123,21 +120,23 @@ const startGame = () => {
     const wasteItem = new Waste(gameContainer);
     wasteItem.makeItRain((wasteItemYPosition, wasteItemXPosition) => {
       if (isCollided(wasteItemYPosition, wasteItemXPosition)) {
-
-
         if (wasteItem.category === 'good') {
           collideMusic.innerHTML = `<audio controls autoplay style="display: none">
         <source src="./sounds/242501__gabrielaraujo__powerup-success.wav" type="audio/mpeg" >
         </audio>`};
         if (wasteItem.category === 'bad') {
-        collideMusic.innerHTML = `<audio controls autoplay style="display: none">
+          collideMusic.innerHTML = `<audio controls autoplay style="display: none">
         <source src="sounds/457752__tissman__fail4.wav" type="audio/mpeg" >
         </audio>`};
-
-        // //////////
+        if (wasteItem.category === 'dunno') {
+          collideMusic.innerHTML = `<audio controls autoplay style="display: none">
+        <source src="sounds/neutralsong.wav" >
+        </audio>`};
         state.totalScore += wasteItem.score;
         wasteItem.removeWaste();
       }
+      //display score in the game container
+      scoreGameContainer.innerHTML = state.totalScore;
     });
   }, 1000);
 
@@ -156,18 +155,42 @@ const startGame = () => {
   });
 }
 
-
+// //VERIFIER LA COLLISION
+// const isCollided = (wasteItemYPosition, wasteItemXPosition) => {
+//   const collisionY = window.innerHeight - BASKET_HEIGHT + 70;
+//   const wasteItemWidth = 80;
+//   const wasteItemHeight = 80;
+//   if (state.basketXPosition < wasteItemXPosition + wasteItemWidth &&
+//     state.basketXPosition + BASKET_WIDTH > wasteItemXPosition &&
+//     collisionY < wasteItemYPosition + wasteItemHeight &&
+//     collisionY + collisionY > wasteItemYPosition) {
+//     return true
+//   } else {
+//     return false;
+//   }
+// };
 
 //VERIFIER LA COLLISION
 const isCollided = (wasteItemYPosition, wasteItemXPosition) => {
   const collisionY = window.innerHeight - BASKET_HEIGHT + 70;
-  const wasteItemWidth = 80;
-  const wasteItemHeight = 80;
+  const wasteItemWidth = 70;
+  const wasteItemHeight = 70;
+  // if (state.basketXPosition < wasteItemXPosition + wasteItemWidth &&
+  //   state.basketXPosition + BASKET_WIDTH > wasteItemXPosition &&
+  //   collisionY < wasteItemYPosition + wasteItemHeight &&
+  //   collisionY + collisionY > wasteItemYPosition) {
+  //   return true
+  // } else {
+  //   return false;
+  // }
+  const collisionLineA = window.innerHeight - BASKET_HEIGHT;
+  const collisionLineB = window.innerHeight - 120;
+
   if (state.basketXPosition < wasteItemXPosition + wasteItemWidth &&
     state.basketXPosition + BASKET_WIDTH > wasteItemXPosition &&
-    collisionY < wasteItemYPosition + wasteItemHeight &&
-    collisionY + collisionY > wasteItemYPosition) {
-    return true
+    wasteItemYPosition > collisionLineA && wasteItemYPosition < collisionLineB
+  ) {
+    return true;
   } else {
     return false;
   }
@@ -182,3 +205,5 @@ playAgain.addEventListener('click', () => {
     endGame();
   }, GAME_TIME);
 });
+
+

@@ -2,69 +2,77 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compost it</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="index.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compost it</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="index.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 </head>
 
 <body>
-    
-    <div id="start-screen-container">
-        <h1>Compost it</h1>
-        <div id="text-container">
-            <p id="intro-paragraph">It's raining waste! <br>
-                Make the perfect compost to feed the worms and save the planet 🌎!</p>
-            <div id="arrows"> <i class="fa-solid fa-caret-left"></i>
-                <i class="fa-solid fa-caret-right"></i> </div>
-            <p>Move the basket with the arrows of your keyboard to catch the ingredients of a good compost.</p>
-        </div>
-        <button id='start-btn' class='btn'> PLAY GAME </button>
+
+  <div id="start-screen-container">
+    <h1>Compost it</h1>
+    <div id="text-container">
+      <p id="intro-paragraph">It's raining waste! <br>
+        Make the perfect compost to feed the worms and save the planet 🌎!
+      </p>
+      <div id="arrows"> <i class="fa-solid fa-caret-left"></i>
+        <i class="fa-solid fa-caret-right"></i> </div>
+      <p>Move the basket with the arrows of your keyboard to catch the ingredients of a good compost.</p>
+    </div>
+    <button id='start-btn' class='btn'> PLAY GAME </button>
+  </div>
+
+
+
+  <div id="game-container" style="display: none">
+    <div id="game-info">
+      <div id="timer"> 01:00 </div>
+      <div>Score: <span id='score-game-container'>0</span> points</div>
     </div>
 
 
+    <div id="basket"> </div>
+    <div id="collide-music"></div>
+  </div>
 
-    <div id="game-container" style="display: none">
-        <div id="timer"> 01:00 </div>
-        <!-- ECRIRE LE BON NUMERO DE SECONDES -->
 
-        <div id="basket"> </div>
-        <div id="collide-music"></div>
+
+  <div id="maturation-stage">
+    <div id="cool-effect">
+      <p>Composting</p>
     </div>
+    <img id="turning-worm" src="./images/turning worm.png" alt="turning worm">
+  </div>
 
 
 
-    <div id="maturation-stage">
-        <div class="cool-effect">
-            <p>Mixing the compost</p>
-            <p>Mixing the compost</p>
-        </div>
-        <img id ="turning-worm" src="./images/turning worm.png" alt="turning worm">
+  <div id='end-page' style="display: none">
+    <div id='content-end-page'>
+
+      <div id="result"> <span id="congrats-word"> </span>You made <span id='scoreHTML'></span> points
+        <p id="reward-sentence"></p>
+      </div>
+
+      <div id='video-div'>
+        <p id="video-sentence">Learn why composting is important here</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/qHYzRaepeMw" title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+
+      <button id='play-again' class='btn'>PLAY AGAIN</button>
     </div>
+  </div>
 
 
-
-    <div id='end-page' style="display: none">
-        <div id='content-end-page'>
-            <div id="result"> <span id="congrats-word"> </span>You made <span id='scoreHTML'></span> points
-                <p id="reward-sentence"></p>
-            </div>
-            <div id='video-div'>
-                <p>Learn why composting is important here
-                </p>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/qHYzRaepeMw"
-                    title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
-            </div>
-            <button id='play-again' class='btn'>PLAY AGAIN</button>
-        </div>
-    </div>
-
-
+  <audio id="miam-sound">
+    <source src="./sounds/miam.m4a" type="audio/mpeg">
+  </audio>
 </body>
 
 </html>
