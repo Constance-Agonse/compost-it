@@ -157,18 +157,26 @@ table {
 }
 
 @keyframes bounce {
-  20%, 50%, 80%,to{
+
+  20%,
+  50%,
+  80%,
+  to {
     transform: translateY(0);
   }
-  40%{
+
+  40% {
     transform: translateY(-30px);
   }
-  70%{
+
+  70% {
     transform: translateY(-15px);
   }
-  90%{
-    transform: translateY(-4px);}
+
+  90% {
+    transform: translateY(-4px);
   }
+}
 
 /* LOADING PAGE */
 
@@ -304,7 +312,7 @@ h1 {
   height: 100%;
 }
 
-#game-info{
+#game-info {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -386,12 +394,12 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
- justify-content: center;
+  justify-content: center;
 }
 
 
 
-#cool-effect  {
+#cool-effect {
   color: white;
   font-size: 6em;
   position: relative;
@@ -414,7 +422,7 @@ h1 {
 }
 
 #content-end-page {
-  background-color: rgba(255,255,255, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   width: 600px;
   display: flex;
   flex-direction: column;
@@ -427,9 +435,11 @@ h1 {
 #result {
   margin-bottom: 70px;
 }
-#video-sentence{
+
+#video-sentence {
   margin-bottom: 20px;
 }
+
 #video-div {
   display: flex;
   flex-direction: column;
