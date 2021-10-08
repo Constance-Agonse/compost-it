@@ -53,6 +53,7 @@ const endGame = () => {
   clearInterval(countdownInterval);
   chronometer.stop();
 
+
   //instead of removing, move to style.display='none'
   // basket.remove();
   basket.style.display = 'none';
@@ -64,7 +65,7 @@ const endGame = () => {
   setTimeout(() => {
     // la page maturation stage est visible pendant 5 secondes
     maturationStage.style.display = 'none';
-    if (state.totalScore > 20) {
+    if (state.totalScore > 100) {
       endPage.style.backgroundImage = `url('./images/YOUWON.png')`;
       winGameSound.play();
       rewardSentence.innerHTML = 'You are a compost master!';
@@ -73,7 +74,7 @@ const endGame = () => {
       scorewHTML.innerHTML = state.totalScore;
     };
 
-    if (state.totalScore <= 20) {
+    if (state.totalScore <= 100) {
       endPage.style.display = 'block';
       congratsWord.innerHTML = 'Oups! '
       scorewHTML.innerHTML = state.totalScore;
@@ -125,7 +126,8 @@ const startGame = () => {
   rainInterval = setInterval(() => {
     const wasteItem = new Waste(gameContainer);
     wasteItem.makeItRain((wasteItemYPosition, wasteItemXPosition) => {
-      if (isCollided(wasteItemYPosition, wasteItemXPosition)) {
+      
+      if (isCollided (wasteItemYPosition, wasteItemXPosition)) {
         if (wasteItem.category === 'good') {
           goodItem.play()
         };
@@ -141,7 +143,9 @@ const startGame = () => {
       //display score in the game container
       scoreGameContainer.innerHTML = state.totalScore;
     });
-  }, 1000);
+  }, 500);
+
+
 
 
 
